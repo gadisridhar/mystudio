@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd "
+       default-lazy-init="true">
+
+
+
+ <!-- EntityManagerFactory -->
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitManager" ref="persistenceUnitManager"/>
+        <property name="jpaProperties">
+            <value>
+                hibernate.dialect=${hibernate.dialect}
+                hibernate.query.substitutions=true 'Y', false 'N'
+                hibernate.cache.use_second_level_cache=true
+                hibernate.cache.provider_class=org.hibernate.cache.EhCacheProvider
+            </value>
+            <!-- Turn batching off for better error messages under PostgreSQL -->
+            <!-- hibernate.jdbc.batch_size=0 -->
+        </property>
+    </bean>
+
+    <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
+        <property name="persistenceXmlLocations">
+            <list>
+                <value>classpath:META-INF/persistence.xml</value>
+            </list>
+        </property>
+        <property name="defaultDataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- Needed so the @PersistenceUnit annotation is recognized -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+
+    <!-- Transaction manager for a single EntityManagerFactory (alternative to JTA) -->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
+    <bean id="extendedFinderNamingStrategy"
+        class="org.yy.base.dao.impl.ExtendedFinderNamingStrategy" />
+           <!--  Dao Layer generic config-->
+    <!--<bean id="finderIntroductionAdvisor" class="org.yy.base.dao.impl.FinderIntroductionAdvisor"/>-->
+    <bean id="finderIntercepter" class="org.yy.base.dao.impl.FinderIntroductionInterceptor" />
+    <bean id="finderIntroductionAdvisor" class="org.springframework.aop.aspectj.AspectJExpressionPointcutAdvisor">
+        <property name="advice" ref="finderIntercepter" />
+        <property name="expression" value="execution(* org.yy..*Dao.*(..))" />
+    </bean>
+
+    <bean id="abstractDaoTarget"
+          class="org.yy.base.dao.impl.GenericDaoJpa" abstract="true">
+        <property name="namingStrategy">
+            <ref bean="extendedFinderNamingStrategy" />
+        </property>
+    </bean>
+    <bean id="abstractDao" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+        <property name="interceptorNames">
+            <list>
+                <value>finderIntroductionAdvisor</value>
+            </list>
+        </property>
+        <property name="interfaces">
+            <list>
+                <value>org.yy.base.dao.FinderExecutor</value>
+            </list>
+        </property>
+
+    </bean>
+
+
+    <!-- UniversalDao - can be used when doing standard CRUD - made available
+        for those who don't mind casting.  If you don't want to cast, look at
+        'fooDao' below. -->
+    <bean id="universalDao" class="org.yy.base.dao.impl.UniversalDaoJpa"/>
+
+
+   <!-- <bean id="personDao" class="org.yy.base.dao.PersonDaoJpa" />-->
+
+        <!--  Dao Layer instances -->
+    <bean id="personDao" parent="abstractDao">
+        <property name="proxyInterfaces">
+            <value>org.yy.base.dao.PersonDao</value>
+        </property>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg>
+                    <value>org.yy.base.model.Person</value>
+                </constructor-arg>
+            </bean>
+        </property>
+    </bean>
+
+</beans>
