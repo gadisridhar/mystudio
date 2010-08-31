@@ -15,7 +15,7 @@
 	<state name="Create request">
 		<transition to="Finding Candidate"></transition>
                 <event type="node-enter">
-                    <action class="org.yy.studyjbpm.recruiting.handlers.CreateNewJobPositionRequestActionHandler"/>
+                    <action class="org.yy.studyjbpm.handlers.CreateNewJobPositionRequestActionHandler"/>
                 </event>
 	</state>
 

@@ -6,7 +6,7 @@ import org.jbpm.graph.exe.ExecutionContext;
 public class HeartCheckUpActionHandler implements ActionHandler {
 
 	public void execute(ExecutionContext executionContext) throws Exception {
-		// TODO Auto-generated method stub
+		executionContext.setVariable("HEART_CHECK_APPROVED", true);
 
 	}
 

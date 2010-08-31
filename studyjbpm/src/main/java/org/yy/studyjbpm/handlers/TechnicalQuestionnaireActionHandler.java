@@ -6,7 +6,7 @@ import org.jbpm.graph.exe.ExecutionContext;
 public class TechnicalQuestionnaireActionHandler implements ActionHandler {
 
 	public void execute(ExecutionContext executionContext) throws Exception {
-		// TODO Auto-generated method stub
+		executionContext.setVariable("TECHNICAL_INTERVIEW_OK", true);
 
 	}
 

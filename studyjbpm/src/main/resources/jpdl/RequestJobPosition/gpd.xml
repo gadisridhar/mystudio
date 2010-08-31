@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<root-container name="RequestJobPosition" width="765" height="585">
+<root-container name="RequestJobPosition" width="522" height="358">
   <node name="Job Position Opened" x="205" y="90" width="213" height="36">
     <edge>
       <label x="5" y="-10"/>

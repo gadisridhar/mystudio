@@ -7,8 +7,13 @@ public class TechnicalQuestionnaireApprovedDecisionHandler implements
 		DecisionHandler {
 
 	public String decide(ExecutionContext executionContext) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		boolean approved = ((Boolean) executionContext.getVariable("TECHNICAL_INTERVIEW_OK")).booleanValue();
+		System.out.println("Technical Interview Approved? = " + approved);
+		
+		if(approved){
+            return "to Medical Check Ups";
+        }
+        return "No - Find a new Candidate";
 	}
 
 }

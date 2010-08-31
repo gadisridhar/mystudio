@@ -6,7 +6,7 @@ import org.jbpm.graph.exe.ExecutionContext;
 public class PsychologicalCheckUpActionHandler implements ActionHandler {
 
 	public void execute(ExecutionContext executionContext) throws Exception {
-		// TODO Auto-generated method stub
+		executionContext.setVariable("PSYCHO_CHECK_APPROVED", true);
 
 	}
 
