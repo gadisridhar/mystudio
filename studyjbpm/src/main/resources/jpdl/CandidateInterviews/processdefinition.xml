@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<process-definition  xmlns="urn:jbpm.org:jpdl-3.3"  name="CandidateInterviews">
+	<description>
+		This process is a representation of the prcess of a employee
+		contratation
+	</description>
+	<start-state name="Interview Possible Candidate">
+		<description>
+			This state represent a request of a human resource
+		</description>
+		<transition to="Initial Interview" />
+	</start-state>
+        <state name="Initial Interview">
+		<transition to="Initial Interview Passed?" />
+                <event type="node-enter">
+                    <action class="org.yy.studyjbpm.handlers.CollectCandidateDataActionHandler"/>
+                </event>
+	</state>
+	<decision name="Initial Interview Passed?">
+		<description>
+                        This node checks that the resume meet the minimal requirements
+		</description>
+		<handler class="org.yy.studyjbpm.handlers.ApproveCandidateSkillsDecisionHandler"></handler>
+		<transition to="Technical Interview"
+			name="Approved - Go to Tecnical Interview" />
+		<transition to="Candidate Discarded"
+			name="No -  Find a new Candidate" />
+	</decision>
+        <state name="Technical Interview">
+                <event type="node-enter">
+                    <action class="org.yy.studyjbpm.handlers.TechnicalQuestionnaireActionHandler"/>
+                </event>
+		<transition to="Technical Interview Passed?" />
+	</state>
+        <decision name="Technical Interview Passed?">
+            <handler class="org.yy.studyjbpm.handlers.TechnicalQuestionnaireApprovedDecisionHandler"></handler>
+		<transition to="Medical Check Ups" name="to Medical Check Ups" />
+		<transition to="Candidate Discarded"
+			name="No - Find a new Candidate" />
+	</decision>
+	<fork name="Medical Check Ups">
+		<transition to="Physical Check Up" name="to Physical Check Up"></transition>
+		<transition to="Heart Check Up" name="to Heart Check Up"></transition>
+		<transition to="Psychological Check Up" name="to Psychological Check Up"></transition>
+	</fork>
+
+        <state name="Physical Check Up">
+                 <event type="node-enter">
+                    <action class="org.yy.studyjbpm.handlers.PhysicalCheckUpActionHandler"/>
+                </event>
+		<transition to="All Examinations Completed"></transition>
+	</state>
+
+	<state name="Psychological Check Up">
+                <event type="node-enter">
+                    <action class="org.yy.studyjbpm.handlers.PsychologicalCheckUpActionHandler"/>
+                </event>
+		<transition to="All Examinations Completed"></transition>
+	</state>
+
+	<state name="Heart Check Up">
+                <event type="node-enter">
+                    <action class="org.yy.studyjbpm.handlers.HeartCheckUpActionHandler"/>
+                </event>
+		<transition to="All Examinations Completed"></transition>
+	</state>
+
+
+	<join name="All Examinations Completed">
+		<transition to="Medical Exams passed?" />
+	</join>
+	
+	
+	<decision name="Medical Exams passed?">
+            <handler class="org.yy.studyjbpm.handlers.ReviewMedicalExamsOutcomeDecisionHandler"></handler>
+		<transition to="Candidate Discarded"
+			name="No -  Find a New Candidate" />
+		<transition to="Project leader Interview" name="Last Interview" />
+	</decision>
+	
+	<state name="Project leader Interview">
+             <event type="node-enter">
+                    <action class="org.yy.studyjbpm.handlers.ProjectLeaderInterviewActionHandler"/>
+                </event>
+		<transition to="Final Acceptance?" />
+	</state>
+	<decision name="Final Acceptance?">
+            <handler class="org.yy.studyjbpm.handlers.FinalAcceptanceDecisionHandler"></handler>
+		<transition to="Create WorkStation" name="to Create WorkStation" />
+		<transition to="Candidate Discarded"
+			name="No - Find a New Candidate" />
+	</decision>
+	<node name="Create WorkStation">
+		<action class="org.yy.studyjbpm.handlers.CreateWorkStationActionHandler"/>
+                <transition to="Candidate Accepted"></transition>
+                
+	</node>
+	
+	<end-state name="Candidate Accepted" >
+             <event type="node-enter">
+                    <action class="org.yy.studyjbpm.handlers.FulFillJobPositionActionHandler"/>
+                </event>
+            
+        </end-state>
+	<end-state name="Candidate Discarded" />
+</process-definition>

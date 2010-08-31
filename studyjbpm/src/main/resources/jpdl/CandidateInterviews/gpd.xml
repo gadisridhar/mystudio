@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root-container name="CandidateInterviews" width="809" height="869">
+  <node name="Interview Possible Candidate" x="216" y="-1" width="214" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Initial Interview" x="228" y="59" width="178" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Initial Interview Passed?" x="222" y="122" width="190" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+    <edge>
+      <label x="-158" y="-20"/>
+      <bendpoint w1="344" h1="-2" w2="-11" h2="-296"/>
+    </edge>
+  </node>
+  <node name="Technical Interview" x="205" y="197" width="200" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Technical Interview Passed?" x="218" y="267" width="195" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+    <edge>
+      <label x="-34" y="-22"/>
+      <bendpoint w1="181" h1="9" w2="-167" h2="-145"/>
+    </edge>
+  </node>
+  <node name="Medical Check Ups" x="188" y="348" width="252" height="24">
+    <edge>
+      <label x="-124" y="-16"/>
+    </edge>
+    <edge>
+      <label x="-94" y="-2"/>
+    </edge>
+    <edge>
+      <label x="31" y="-11"/>
+    </edge>
+  </node>
+  <node name="Physical Check Up" x="15" y="410" width="148" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Psychological Check Up" x="446" y="406" width="171" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Heart Check Up" x="258" y="409" width="132" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="All Examinations Completed" x="196" y="484" width="252" height="24">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Medical Exams passed?" x="227" y="556" width="195" height="36">
+    <edge>
+      <label x="-130" y="13"/>
+      <bendpoint w1="254" h1="1" w2="-156" h2="139"/>
+    </edge>
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Project leader Interview" x="236" y="634" width="187" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Final Acceptance?" x="240" y="697" width="180" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+    <edge>
+      <label x="-158" y="14"/>
+      <bendpoint w1="354" h1="-2" w2="-40" h2="279"/>
+    </edge>
+  </node>
+  <node name="Create WorkStation" x="241" y="758" width="181" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Candidate Accepted" x="234" y="830" width="197" height="36"/>
+  <node name="Candidate Discarded" x="658" y="416" width="150" height="36"/>
+</root-container>

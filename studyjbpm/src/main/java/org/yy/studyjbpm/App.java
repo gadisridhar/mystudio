@@ -1,4 +1,4 @@
-package org.yy.studyesper;
+package org.yy.studyjbpm;
 
 /**
  * Hello world!

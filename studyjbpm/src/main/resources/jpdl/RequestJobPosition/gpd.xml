@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root-container name="RequestJobPosition" width="765" height="585">
+  <node name="Job Position Opened" x="205" y="90" width="213" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Finding Candidate" x="195" y="249" width="247" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Create request" x="193" y="167" width="240" height="36">
+    <edge>
+      <label x="5" y="-10"/>
+    </edge>
+  </node>
+  <node name="Job Position Fulfilled" x="202" y="321" width="230" height="36"/>
+  <deployment serverName="" serverPort="" serverDeployer="">
+    <classesAndResources/>
+    <filesAndFolders>
+      <element value="/studyjbpm/src/main/resources/jpdl/RequestJobPosition/gpd.xml"/>
+      <element value="/studyjbpm/src/main/resources/jpdl/RequestJobPosition/processdefinition.xml"/>
+      <element value="/studyjbpm/src/main/resources/jpdl/RequestJobPosition/processimage.jpg"/>
+    </filesAndFolders>
+  </deployment>
+</root-container>
