@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <!--是否开启动态方法调用-->
+    <constant name="struts.enable.DynamicMethodInvocation" value="false" />
+    
+    <!--是否使用开发者模式-->
+    <constant name="struts.devMode" value="ture" />
+    
+    <!--对于某些j2ee服务器不支持httpservletRequest调用getParametermap()
+               可以设置true来解决 如:weblogic orion oc4j
+    <constant name="struts.dispatcher.parametersWorkaround" value="true"/>
+    -->
+    
+    <!--上传文件的的临时保存路径 默认是javax.servlet.context.tempdir
+    <constant name="struts.multipart.saveDir" value="D:\TinyLight\Xeducation\strutsUpfileTemp"/>
+    -->
+    
+    <!-- 激活从新载入xml配置文件功能为Action准备的 -->
+    <constant name="struts.configuration.xml.reload" value="true" />
+    
+    <!-- 设置spring为action的工厂 -->
+    <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+    
+    <!-- action中注入spring的bean的方式,按照名称策略 -->
+    <constant name="struts.objectFactory.spring.autoWire" value="name" />
+    
+    <!-- 默认视图界面的定位 -->
+    <constant name="struts.convention.result.path" value="/WEB-INF/content/" />
+    
+    <!-- 含有此名称的包将会被Convention插件扫描 -->
+    <constant name="struts.convention.package.locators" value="actions" />
+    
+    <!-- 
+		使用Convention插件,实现约定大于配置的零配置文件风格.
+	          具体使用方法见：
+	    http://cwiki.apache.org/S2PLUGINS/convention-plugin.html
+	-->
+	
+	<!-- 自定义action后缀名 -->
+	<constant name="struts.action.extension" value="tl" />
+	
+    <!-- Add packages here -->
+</struts>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false">
+    <class name="com.opensymphony.workflow.spi.hibernate3.HibernateWorkflowEntry" table="OS_WFENTRY">
+        <id name="id" unsaved-value="-1">
+            <generator class="native"/>
+        </id>
+
+        <property name="workflowName" column="name"/>
+        <property name="state"/>
+
+        <bag name="currentSteps" cascade="all-delete-orphan" inverse="true">
+            <key column="entry_Id"/>
+            <!-- index column="stepIndex"/-->
+            <one-to-many class="com.opensymphony.workflow.spi.hibernate3.HibernateCurrentStep"/>
+        </bag>
+
+        <bag name="historySteps" cascade="all" inverse="true">
+            <key column="entry_Id"/>
+            <!-- index column="stepIndex"/-->
+            <one-to-many class="com.opensymphony.workflow.spi.hibernate3.HibernateHistoryStep"/>
+        </bag>
+
+    </class>
+</hibernate-mapping>

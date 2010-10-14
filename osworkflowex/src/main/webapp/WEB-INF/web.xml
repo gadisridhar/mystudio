@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<display-name>TinyLight's Xedu</display-name>
+	
+    <!-- Spring ApplicationContext配置文件的路径,可使用通配符，多个路径用,号分隔
+                      此参数用于后面的Spring-Context loader -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+		    classpath:springConfig/applicationContext.xml
+		</param-value>
+	</context-param>
+	
+	<!-- 著名的 Character Encoding filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>
+			org.springframework.web.filter.CharacterEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!--Hibernate Open Session in View Filter-->
+	<!-- 假设在你的应用中Hibernate是通过spring 来管理它的session.如果在你的应用中没有使用OpenSessionInViewFilter
+		或者OpenSessionInViewInterceptor,session会在transaction结束后关闭，此时会抛出session is close 的异常-->
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+		</filter-class>
+	</filter>
+    
+	<!-- 和struts2的url后缀相同,排除js,css,图片等的干扰 -->
+	<filter-mapping>
+		<filter-name>hibernateFilter</filter-name>
+		<url-pattern>*.tl</url-pattern>
+	</filter-mapping>
+
+    <!-- struts2配置 ver 2.1.3后的过滤 -->
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/s/*</url-pattern>
+    </filter-mapping>
+	
+	<!--Spring ApplicationContext 载入    -->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	
+	<!-- 扩展spring bean的作用域有request,session,global session等-->
+	<listener>
+		<listener-class>
+			org.springframework.web.context.request.RequestContextListener
+		</listener-class>
+	</listener>
+	
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+	
+	<!-- DWR配置 -->
+	<servlet>
+	  <servlet-name>dwr</servlet-name>
+	  <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+	  <init-param>
+	      <param-name>debug</param-name>
+	      <param-value>true</param-value>
+	  </init-param>
+	</servlet>
+	<servlet-mapping>
+	      <servlet-name>dwr</servlet-name>
+	      <url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+
+    <!-- OSworkflow配置 -->
+	<servlet>
+		<servlet-name>SOAPWorkflow</servlet-name>
+		<servlet-class>com.opensymphony.workflow.soap.SOAPWorkflowServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SOAPWorkflow</servlet-name>
+		<url-pattern>/soap/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 错误处理页面 start-->
+<!--<error-page>
+		<error-code>500</error-code>
+		<location></location>
+	</error-page>
+	
+	<error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location></location>
+    </error-page>
+	
+	<error-page>
+		<error-code>404</error-code>
+		<location></location>
+	</error-page>
+	
+	<error-page>
+		<error-code>403</error-code>
+		<location></location>
+	</error-page>  -->
+	<!-- 错误处理页面 end-->
+  
+   <!-- 开始页面 -->
+   <welcome-file-list>
+     <welcome-file>/WEB-INF/page/login.jsp</welcome-file>
+   </welcome-file-list>
+   <session-config>  
+     <session-timeout>150</session-timeout>  
+   </session-config>
+   
+</web-app>

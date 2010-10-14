@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+	<substitutionProperty name="log.base" value="../logs/pm" />
+
+	<jmxConfigurator />
+
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>[%thread][%logger{80}][%level]: %msg%n</pattern>
+		</layout>
+	</appender>
+
+	<appender name="logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<Encoding>UTF-8</Encoding>
+		<File>${log.base}.log</File>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<FileNamePattern>${log.base}.%d{yyyy-MM-dd}.log.zip</FileNamePattern>
+		</rollingPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<pattern>%date[%thread][%logger{80}][%level]: %msg%n</pattern>
+		</layout>
+	</appender>
+	
+	<logger name="org.springframework">
+		<level value="warn" />
+	</logger>
+
+	<logger name="org.hibernate">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="org.hibernate.SQL">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="org.hibernate.cache">
+		<level value="warn" />
+	</logger>
+	
+	<logger name="com.tinylight">
+		<level value="info" />
+	</logger>
+
+	<root>
+		<level value="warn" />
+		<appender-ref ref="stdout" />
+		<appender-ref ref="logfile" />
+	</root>
+</configuration>
+

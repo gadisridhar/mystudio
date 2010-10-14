@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workflows>
+  <workflow name="mytest" type="resource" location="myworkflow.xml"/>
+</workflows>

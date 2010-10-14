@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    
+    <description>Spring相关配置</description>
+    
+	<!-- 使用外部文件配置数据源的属性 -->
+	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<!-- 多个properties文件可选 -->
+		<property name="ignoreResourceNotFound" value="true" />
+		<property name="locations">
+			<list>
+				<!-- 外部文件地址 -->
+				<value>classpath:database.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="utf-8" />
+	</bean>
+
+	<!-- 配置数据源 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${driverClassName}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		
+      	<!-- DBCP连接池配置 -->
+		<property name="initialSize" value="5" />
+		<property name="maxActive" value="100" />
+		<property name="maxIdle" value="100" />
+		<property name="minIdle" value="0" />
+		<property name="maxWait" value="10000" />
+		<property name="poolPreparedStatements" value="true" />
+		<property name="defaultAutoCommit" value="false" />
+	</bean>
+
+	<!-- hibernate3 sessionfactory配置 
+		使用AnnotationSessionFactoryBean创建基于JPA注解的SessionFactory-->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<!-- 引用数据源 -->
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="namingStrategy">
+			<bean class="org.hibernate.cfg.ImprovedNamingStrategy" />
+		</property>
+		<!-- hibernate的属性具体见hibernate文档 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.MySQLDialect
+				</prop>
+				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+                <!-- 非0值 指定jdbc抓取数量的大小调用Statement.setFetchSize() -->
+				<prop key="hibernate.jdbc.fetch_size">${hibernate.jdbc.fetch_size}</prop>
+				<!-- jdbc批量更新 建议5到30 -->
+				<prop key="hibernate.jdbc.batch_size">${hibernate.jdbc.batch_size}</prop>
+				<!--说明一下：如果不设置查询缓存，那么hibernate只会缓存使用load()方法获得的单个持久化对象
+                                                      如果想缓存使用findall()、list()、Iterator()、createCriteria()、createQuery()
+                                                      等方法获得的数据结果集的话就需要设置hibernate.cache.use_query_cache true 才行  -->
+				<prop key="hibernate.cache.use_query_cache">${hibernate.cache.use_query_cache}</prop>
+				<prop key="hibernate.cache.provider_class">
+					org.hibernate.cache.EhCacheProvider
+				</prop>
+                <prop key="hibernate.cache.provider_configuration_file_resource_path">
+                   ${hibernate.ehcache_config_file}
+                </prop>
+			</props>
+		</property>
+		<property name="packagesToScan" value="com.tinylight.xedu.entityclass" />
+
+	</bean>
+    
+    <!-- 加载spring功能列表文件 -->
+    <import resource="applicationContext-list.xml"/>
+</beans>
