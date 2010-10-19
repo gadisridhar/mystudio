@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dwr xmlns="http://directwebremoting.org/schema/dwr20" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://directwebremoting.org/schema/dwr20 http://directwebremoting.org/schema/dwr20.xsd">
+
+<allow>
+	<create creator="new" javascript="Hello" scope="application">
+		<param name="class" value="org.yy.service.Hello"/>
+		
+	</create>
+	<convert converter="bean" match="org.yy.service.*"></convert>
+</allow>
+</dwr>
