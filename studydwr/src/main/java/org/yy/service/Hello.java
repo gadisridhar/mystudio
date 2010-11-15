@@ -4,14 +4,14 @@ public class Hello {
 	
 	public String hello(String name){
 		
-		return "å“ˆç½—" + name;
+		return "¹şÂŞ" + name;
 	}
 	
 	public Name getBean(String myname){
 		
 		Name name = new Name();
 		name.setName(myname);
-		name.setChineseName("æå°æ˜");
+		name.setChineseName("ÀîĞ¡Ã÷");
 		name.setEnglishName("Xiaoming Lee");
 		return name;
 	}

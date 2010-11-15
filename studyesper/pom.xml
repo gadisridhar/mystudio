@@ -17,49 +17,61 @@
     <dependency>
     	<groupId>com.espertech</groupId>
     	<artifactId>esper</artifactId>
-    	<version>3.4.0</version>
+    	<version>3.5.0</version>
     </dependency>
     <dependency>
     	<groupId>com.espertech</groupId>
     	<artifactId>esperio-csv</artifactId>
-    	<version>3.4.0</version>
+    	<version>3.5.0</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>com.espertech</groupId>
     	<artifactId>esperio-db</artifactId>
-    	<version>3.4.0</version>
+    	<version>3.5.0</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>com.espertech</groupId>
     	<artifactId>esperio-http</artifactId>
-    	<version>3.4.0</version>
+    	<version>3.5.0</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>com.espertech</groupId>
     	<artifactId>esperio-socket</artifactId>
-    	<version>3.4.0</version>
+    	<version>3.5.0</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>com.espertech</groupId>
     	<artifactId>esperio-springjms</artifactId>
-    	<version>3.4.0</version>
+    	<version>3.5.0</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
     <dependency>
     	<groupId>com.espertech</groupId>
     	<artifactId>esperio-stax</artifactId>
-    	<version>3.4.0</version>
+    	<version>3.5.0</version>
     	<type>jar</type>
     	<scope>compile</scope>
     </dependency>
   </dependencies>
+  
+  <build>
+  	<plugins>
+  		<plugin>
+  			<artifactId>maven-compiler-plugin</artifactId>
+  			<configuration>
+  				<source>1.6</source>
+  				<target>1.6</target>
+  			</configuration>
+  		</plugin>
+  	</plugins>
+  </build>
 </project>

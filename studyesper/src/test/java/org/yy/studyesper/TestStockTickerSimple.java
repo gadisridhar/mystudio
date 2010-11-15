@@ -18,7 +18,7 @@ import com.espertech.esper.client.time.TimerControlEvent;
 public class TestStockTickerSimple {
 	EPServiceProvider epService;
 
-	@Before
+	//@Before
 	public void setUp() throws Exception {
 
 		Configuration configuration = new Configuration();
@@ -37,7 +37,7 @@ public class TestStockTickerSimple {
 						TimerControlEvent.ClockType.CLOCK_EXTERNAL));
 	}
 
-	@Test
+	//@Test
 	public void testStockTicker() throws Exception {
 		log.info(".testStockTicker");
 		String eplStatement = "every tick=StockTick()";
@@ -56,7 +56,23 @@ public class TestStockTickerSimple {
 		epService.getEPRuntime().sendEvent(new StockTick("ABC",20.1d));
 		epService.getEPRuntime().sendEvent(new StockTick("ABC",20.2d));
 	}
+	
+	@Test
+	public void test1(){
+		Configuration config = new Configuration();
+		config.addEventType("StockTick", StockTick.class);
+		EPServiceProvider ep = EPServiceProviderManager.getProvider("testProvider", config);
+		EPStatement statement = ep.getEPAdministrator().createEPL("select * from StockTick");
+		statement.addListener(new UpdateListener(){
 
+			@Override
+			public void update(EventBean[] arg0, EventBean[] arg1) {
+				log.info("Recevied Message" + arg0[0].getUnderlying().toString());
+				
+			}});
+		ep.getEPRuntime().sendEvent(new StockTick("IBM",23.23));
+		ep.destroy();
+	}
 	private static final Log log = LogFactory
 			.getLog(TestStockTickerSimple.class);
 }
