@@ -1,0 +1,25 @@
+<object-stream>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>4</type>
+  <activationId>A stand alone rule [1]</activationId>
+  <rule>A stand alone rule</rule>
+  <declarations>$booleanVal=true(1); $vo=org.yy.studydrools.entity.RoolVO@10ca208(1)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ObjectLogEvent>
+  <type>1</type>
+  <factId>1</factId>
+  <objectToString>org.yy.studydrools.entity.RoolVO@10ca208</objectToString>
+</org.drools.audit.event.ObjectLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>6</type>
+  <activationId>A stand alone rule [1]</activationId>
+  <rule>A stand alone rule</rule>
+  <declarations>$booleanVal=true(1); $vo=org.yy.studydrools.entity.RoolVO@10ca208(1)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+<org.drools.audit.event.ActivationLogEvent>
+  <type>7</type>
+  <activationId>A stand alone rule [1]</activationId>
+  <rule>A stand alone rule</rule>
+  <declarations>$booleanVal=true(1); $vo=org.yy.studydrools.entity.RoolVO@10ca208(1)</declarations>
+</org.drools.audit.event.ActivationLogEvent>
+</object-stream>

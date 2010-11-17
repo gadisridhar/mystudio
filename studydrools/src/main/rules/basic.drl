@@ -1,0 +1,16 @@
+#created on: 2010-11-17
+package org.yy.rules
+import org.yy.studydrools.entity.RoolVO
+
+rule "A stand alone rule"
+	
+	when
+		$vo : RoolVO(stringValue == "Learning to drool",
+					$booleanVal : booleanValue)
+		eval( $booleanVal )
+	then 
+		System.out.println("first Rule");
+		$vo.setStringValue("Done.");
+		
+end
+
